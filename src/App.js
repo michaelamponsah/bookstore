@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Navbar from './components/navbar/Navbar';
+import BooksPage from './pages/books/BooksPage';
+import CategoriesPage from './pages/categories/CategoriesPage';
+
+const BookData = [
+  {
+    id: '1',
+    genre: 'Action',
+    title: 'The Hunger Games',
+    author: 'Suzanne Collins',
+  },
+  {
+    id: '2',
+    genre: 'Science Fiction',
+    title: 'Dune',
+    author: 'Frank Herbert',
+  },
+];
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<BooksPage bookData={BookData} />} />
+          <Route path="/categories" element={<CategoriesPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

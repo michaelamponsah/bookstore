@@ -1,0 +1,10 @@
+.card-wrapper {
+  background-color: #fff;
+  width: 70%;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  padding: 1.8em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
