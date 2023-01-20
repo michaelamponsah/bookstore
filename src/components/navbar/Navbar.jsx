@@ -1,15 +1,16 @@
 import React from 'react';
-import styles from './Header.module.css';
+import { NavLink } from 'react-router-dom';
+import styles from './Navbar.module.css';
 
-const Header = () => (
+const Navbar = () => (
   <header>
     <div className={`container ${styles['header--wrapper']}`}>
       <div className={`${styles['header--left']}`}>
         <span>Bookstore CMS</span>
         <nav>
           <ul>
-            <li>Books</li>
-            <li>Categories</li>
+            <li><NavLink to="/">Books</NavLink></li>
+            <li><NavLink to="/categories">Categories</NavLink></li>
           </ul>
         </nav>
       </div>
@@ -20,4 +21,4 @@ const Header = () => (
   </header>
 );
 
-export default Header;
+export default Navbar;
