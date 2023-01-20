@@ -1,8 +1,8 @@
 .stats-details-wrapper {
- display: grid;
- grid-template-columns: 2fr 1fr;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
 }
 
-.progress-section  span {
+.progress-section span {
   display: block;
 }
