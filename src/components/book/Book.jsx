@@ -18,7 +18,7 @@ const Book = ({ book }) => {
             <p className={`${styles['author-name']}`}>{author}</p>
           </div>
           <div className={styles.comments}>
-            Comments | Remove | Edit
+            <button type="button">Remove</button>
           </div>
         </div>
         <div>Stats 80%</div>
