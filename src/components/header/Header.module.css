@@ -1,0 +1,33 @@
+.header--wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 2em 2.5em;
+  background-color: #fff;
+}
+
+.header--wrapper ul {
+  list-style: none;
+}
+
+.header--left {
+  display: flex;
+  align-items: center;
+}
+
+.header--left span {
+  display: block;
+  margin-right: 2em;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0290ff;
+}
+
+.header--left nav ul {
+  display: flex;
+}
+
+ul li {
+  margin-right: 1em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
