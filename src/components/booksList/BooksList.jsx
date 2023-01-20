@@ -1,26 +1,11 @@
 import React from 'react';
-// import { PropTypes } from 'prop-types';
+import { PropTypes } from 'prop-types';
 import Book from '../book/Book';
 
-const BookData = [
-  {
-    id: '1',
-    genre: 'Action',
-    title: 'The Hunger Games',
-    author: 'Suzanne Collins',
-  },
-  {
-    id: '2',
-    genre: 'Science Fiction',
-    title: 'Dune',
-    author: 'Frank Herbert',
-  },
-];
-
-const BooksList = () => (
+const BooksList = ({ bookData }) => (
   <ul>
     {
-      BookData.map((book) => (
+      bookData.map((book) => (
         <li key={book.id}>
           <Book book={book} />
         </li>
@@ -29,4 +14,12 @@ const BooksList = () => (
   </ul>
 );
 
+BooksList.propTypes = {
+  bookData: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    genre: PropTypes.string,
+    title: PropTypes.string,
+    author: PropTypes.string,
+  })).isRequired,
+};
 export default BooksList;
