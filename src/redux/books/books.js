@@ -24,7 +24,7 @@ const booksReducer = (state = initialState, action) => {
     case REMOVE: {
       const books = [...state];
       const index = books.indexOf(action.payload);
-      const updatedBooks = books.filter((book, id) => (id !== index ? book : null));
+      const updatedBooks = books.filter((book, id) => (id !== index));
       return updatedBooks;
     }
     default:
