@@ -2,7 +2,22 @@
 const ADD = 'bookstore/books/ADD';
 const REMOVE = 'bookstore/books/REMOVE';
 
-const booksReducer = (state = [], action) => {
+const initialState = [
+  {
+    id: '1',
+    genre: 'Action',
+    title: 'The Hunger Games',
+    author: 'Suzanne Collins',
+  },
+  {
+    id: '2',
+    genre: 'Science Fiction',
+    title: 'Dune',
+    author: 'Frank Herbert',
+  },
+];
+
+const booksReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD:
       return [...state, action.payload];
