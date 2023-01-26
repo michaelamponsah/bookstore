@@ -1,23 +1,27 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { useDispatch } from 'react-redux';
 import Card from '../card/Card';
 import styles from './Book.module.css';
-import { removeBook } from '../../redux/books/books';
+import { removeBook, removeBookAsync } from '../../redux/books/books';
 
 const Book = ({ book }) => {
   const {
-    id, genre, title, author,
+    item_id,
+    genre, title,
+    author,
   } = book;
 
   const dispatch = useDispatch();
 
   const handleDelete = (bookData) => {
-    dispatch(removeBook(bookData));
+    // dispatch(removeBook(bookData));
+    dispatch(removeBookAsync(bookData));
   };
 
   return (
-    <Card id={id}>
+    <Card id={item_id}>
       <div className={`${styles['stats-details-wrapper']}`}>
         <div className={`${styles['book-details']}`}>
           <div className={`${styles['book-details']}`}>
@@ -42,7 +46,7 @@ const Book = ({ book }) => {
 
 Book.propTypes = {
   book: PropTypes.shape({
-    id: PropTypes.string,
+    item_id: PropTypes.string,
     genre: PropTypes.string,
     title: PropTypes.string,
     author: PropTypes.string,
