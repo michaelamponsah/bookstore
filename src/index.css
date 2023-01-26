@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 ::before,
@@ -16,5 +17,17 @@ body {
 
 .container {
   margin: 0 auto;
-  width: 80%;
+  width: 90%;
+}
+
+button {
+  cursor: pointer;
+}
+
+.btn-filled {
+  background-color: #0290ff;
+  color: #fff;
+  padding: 0.5em;
+  border: none;
+  text-transform: uppercase;
 }

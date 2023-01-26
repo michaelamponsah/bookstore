@@ -1,6 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 import Card from '../card/Card';
 import styles from './Book.module.css';
 import { removeBookAsync } from '../../redux/books/books';
@@ -8,7 +10,7 @@ import { removeBookAsync } from '../../redux/books/books';
 const Book = ({ book }) => {
   const {
     item_id: id,
-    genre,
+    category,
     title,
     author,
   } = book;
@@ -24,7 +26,7 @@ const Book = ({ book }) => {
       <div className={`${styles['stats-details-wrapper']}`}>
         <div className={`${styles['book-details']}`}>
           <div className={`${styles['book-details']}`}>
-            <span className={styles.genre}>{genre}</span>
+            <span className={styles.genre}>{category}</span>
             <h3 className={`${styles['book-title']}`}>{title}</h3>
             <p className={`${styles['author-name']}`}>{author}</p>
           </div>
@@ -32,12 +34,20 @@ const Book = ({ book }) => {
             <button type="button" onClick={() => handleDelete(book)}>Remove</button>
           </div>
         </div>
-        <div>Stats 80%</div>
+        <div className={`${styles['progress-wrapper']}`}>
+          <CircularProgressbar value={17} text={`${17}%`} className={styles.progress} />
+          <div>
+            17%
+            <br />
+            Completed
+          </div>
+          <span className={styles.divider} />
+        </div>
       </div>
       <div className={`${styles['progress-section']}`}>
-        Current Chapter
+        <span>Current Chapter</span>
         <span>Chapter 17</span>
-        <button type="button">update progress</button>
+        <button type="button" className="btn-filled">update progress</button>
       </div>
     </Card>
   );
@@ -46,7 +56,7 @@ const Book = ({ book }) => {
 Book.propTypes = {
   book: PropTypes.shape({
     item_id: PropTypes.string,
-    genre: PropTypes.string,
+    category: PropTypes.string,
     title: PropTypes.string,
     author: PropTypes.string,
   }).isRequired,

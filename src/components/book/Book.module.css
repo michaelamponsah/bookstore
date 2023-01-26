@@ -1,8 +1,63 @@
+.genre {
+  color: rgb(124, 124, 124);
+  text-transform: capitalize;
+  font-weight: bolder;
+}
+
+.book-title {
+  margin: 0.25em 0;
+  font-size: 1.25rem;
+  font-weight: bolder;
+}
+
+.author-name {
+  color: #0290ff;
+  text-transform: capitalize;
+  font-size: 0.9rem;
+}
+
+.comments {
+  margin-top: 1.3em;
+}
+
+.comments > button {
+  color: #0290ff;
+  border: none;
+  background: none;
+  font-size: 0.9rem;
+}
+
 .stats-details-wrapper {
   display: grid;
   grid-template-columns: 2fr 1fr;
 }
 
+.divider {
+  display: block;
+  width: 2.5px;
+  height: 100px;
+  background-color: rgb(167, 167, 167);
+  margin-left: 4em;
+}
+
+.progress {
+  width: 90px;
+  height: 90px;
+  margin-right: 2em;
+}
+
+.progress-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .progress-section span {
   display: block;
+  margin-top: 0.8em;
+  margin-bottom: 1.2em;
+}
+
+.progress-section span:first-child {
+  color: rgb(124, 124, 124);
 }

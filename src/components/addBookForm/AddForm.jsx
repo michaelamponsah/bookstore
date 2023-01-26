@@ -40,18 +40,34 @@ const AddForm = () => {
       <form className={`${styles['add-form']}`} onSubmit={handleSubmit}>
         <div className={`${styles['form-control']}`}>
           <label htmlFor="book-title">
-            <input type="text" id="book-title" name="title" value={bookDetails.title} placeholder="Book Title" onChange={handleChange} />
+            <input
+              type="text"
+              id="book-title"
+              name="title"
+              value={bookDetails.title}
+              placeholder="Book Title"
+              onChange={handleChange}
+              required
+            />
           </label>
         </div>
 
         <div className={`${styles['form-control']}`}>
           <label htmlFor="author-name">
-            <input type="text" id="author-name" name="author" value={bookDetails.author} placeholder="Author" onChange={handleChange} />
+            <input 
+              type="text"
+              id="author-name"
+              name="author"
+              value={bookDetails.author}
+              placeholder="Author"
+              onChange={handleChange}
+              required
+            />
           </label>
         </div>
 
-        <div className={`${styles['form-control']}`}>
-          <button type="submit">Add Book</button>
+        <div>
+          <button type="submit" className="btn-filled">Add Book</button>
         </div>
       </form>
     </div>
