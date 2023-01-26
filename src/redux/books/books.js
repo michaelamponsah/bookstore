@@ -1,46 +1,76 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import bookService from '../../services/books';
+import getArrayFromJSON from '../../utils/getArrayFromJSON';
+
 // Actions
 const ADD = 'bookstore/books/ADD';
 const REMOVE = 'bookstore/books/REMOVE';
+const SET = 'bookstore/books/SET';
 
-const initialState = [
-  {
-    id: '1',
-    genre: 'Action',
-    title: 'The Hunger Games',
-    author: 'Suzanne Collins',
-  },
-  {
-    id: '2',
-    genre: 'Science Fiction',
-    title: 'Dune',
-    author: 'Frank Herbert',
-  },
-];
+const initialState = [];
 
 const booksReducer = (state = initialState, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
+    case SET: {
+      return payload;
+    }
+
     case ADD:
       return [...state, action.payload];
+
     case REMOVE: {
       const books = [...state];
       const index = books.indexOf(action.payload);
       const updatedBooks = books.filter((book, id) => (id !== index));
       return updatedBooks;
     }
+
     default:
       return state;
   }
 };
 
 // Action creators
-export const addBook = (payload) => ({
-  type: ADD,
-  payload,
+
+export const addBookAsync = createAsyncThunk(ADD, async (payload, thunkAPI) => {
+  let data;
+  try {
+    const response = await bookService.createNewBook(payload);
+    data = response.text();
+    thunkAPI.dispatch({
+      type: ADD,
+      payload,
+    });
+  } catch (error) {
+    return error;
+  }
+  return data;
 });
 
-export const removeBook = (payload) => ({
-  type: REMOVE,
-  payload,
+export const removeBookAsync = createAsyncThunk(REMOVE, async (payload, thunkAPI) => {
+  let data;
+  try {
+    const response = await bookService.deleteSingleBook(payload);
+    data = response.text();
+    thunkAPI.dispatch({ type: REMOVE, payload });
+  } catch (error) {
+    return error;
+  }
+  return data;
+});
+
+export const getAllBooksAsync = createAsyncThunk(SET, async (param, thunkAPI) => {
+  let payload;
+  try {
+    const response = await bookService.getAllBooks();
+    const data = await response.json();
+    payload = getArrayFromJSON(data);
+    thunkAPI.dispatch({ type: SET, payload });
+  } catch (error) {
+    return error;
+  }
+  return payload;
 });
 
 export default booksReducer;
