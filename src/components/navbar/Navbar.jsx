@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { BsPersonFill } from 'react-icons/bs';
 import styles from './Navbar.module.css';
 
 const Navbar = () => (
@@ -15,7 +16,7 @@ const Navbar = () => (
         </nav>
       </div>
       <div className={`${styles['header--right']}`}>
-        user-icon
+        <BsPersonFill color="#0290ff" size={30}/>
       </div>
     </div>
   </header>
