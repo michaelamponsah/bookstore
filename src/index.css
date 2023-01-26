@@ -29,4 +29,5 @@ button {
   color: #fff;
   padding: 0.5em;
   border: none;
+  text-transform: uppercase;
 }
