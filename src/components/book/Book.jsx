@@ -1,27 +1,26 @@
-/* eslint-disable camelcase */
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { useDispatch } from 'react-redux';
 import Card from '../card/Card';
 import styles from './Book.module.css';
-import { removeBook, removeBookAsync } from '../../redux/books/books';
+import { removeBookAsync } from '../../redux/books/books';
 
 const Book = ({ book }) => {
   const {
-    item_id,
-    genre, title,
+    item_id: id,
+    genre,
+    title,
     author,
   } = book;
 
   const dispatch = useDispatch();
 
   const handleDelete = (bookData) => {
-    // dispatch(removeBook(bookData));
     dispatch(removeBookAsync(bookData));
   };
 
   return (
-    <Card id={item_id}>
+    <Card id={id}>
       <div className={`${styles['stats-details-wrapper']}`}>
         <div className={`${styles['book-details']}`}>
           <div className={`${styles['book-details']}`}>

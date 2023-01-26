@@ -1,4 +1,6 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import bookService from '../../services/books';
+import getArrayFromJSON from '../../utils/getArrayFromJSON';
 
 // Actions
 const ADD = 'bookstore/books/ADD';
@@ -11,15 +13,7 @@ const booksReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case SET: {
-      const keys = Object.keys(payload);
-
-      const updatedState = keys.map((key) => ({
-        item_id: key,
-        title: payload[key][0].title,
-        author: payload[key][0].author,
-        category: payload[key][0].category,
-      }));
-      return updatedState;
+      return payload;
     }
 
     case ADD:
@@ -39,12 +33,12 @@ const booksReducer = (state = initialState, action) => {
 
 // Action creators
 
-export const addBookAsync = (payload) => async (dispatch) => {
+export const addBookAsync = createAsyncThunk(ADD, async (payload, thunkAPI) => {
   let data;
   try {
     const response = await bookService.createNewBook(payload);
     data = response.text();
-    dispatch({
+    thunkAPI.dispatch({
       type: ADD,
       payload,
     });
@@ -52,37 +46,31 @@ export const addBookAsync = (payload) => async (dispatch) => {
     return error;
   }
   return data;
-};
+});
 
-export const removeBookAsync = (payload) => async (dispatch) => {
+export const removeBookAsync = createAsyncThunk(REMOVE, async (payload, thunkAPI) => {
   let data;
   try {
     const response = await bookService.deleteSingleBook(payload);
     data = response.text();
-
-    dispatch({
-      type: REMOVE,
-      payload,
-    });
+    thunkAPI.dispatch({ type: REMOVE, payload });
   } catch (error) {
     return error;
   }
   return data;
-};
+});
 
-export const getAllBooksAsync = () => async (dispatch) => {
+export const getAllBooksAsync = createAsyncThunk(SET, async (param, thunkAPI) => {
   let payload;
   try {
     const response = await bookService.getAllBooks();
-    payload = await response.json();
-    dispatch({
-      type: SET,
-      payload,
-    });
+    const data = await response.json();
+    payload = getArrayFromJSON(data);
+    thunkAPI.dispatch({ type: SET, payload });
   } catch (error) {
     return error;
   }
   return payload;
-};
+});
 
 export default booksReducer;
