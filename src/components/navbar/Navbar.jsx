@@ -4,8 +4,8 @@ import { BsPersonFill } from 'react-icons/bs';
 import styles from './Navbar.module.css';
 
 const Navbar = () => (
-  <header>
-    <div className={`${styles['header--wrapper']}`}>
+  <header className={`${styles.header}`}>
+    <div className={`container ${styles['header--wrapper']}`}>
       <div className={`${styles['header--left']}`}>
         <span>Bookstore CMS</span>
         <nav>

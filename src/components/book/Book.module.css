@@ -11,7 +11,7 @@
 }
 
 .author-name {
-  color: #4386bf;
+  color: #0290ff;
   text-transform: capitalize;
   font-size: 0.9rem;
 }
@@ -21,7 +21,7 @@
 }
 
 .comments > button {
-  color: #4386bf;
+  color: #0290ff;
   border: none;
   background: none;
   font-size: 0.9rem;
