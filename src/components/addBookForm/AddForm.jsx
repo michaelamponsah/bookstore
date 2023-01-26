@@ -1,31 +1,34 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addBook } from '../../redux/books/books';
+import { v4 as uuidv4 } from 'uuid';
+import { addBookAsync } from '../../redux/books/books';
 import styles from './AddForm.module.css';
 
 const AddForm = () => {
-  const [userInput, setUserInput] = useState({
-    id: '',
-    genre: 'Action',
+  const [bookDetails, setbookDetails] = useState({
+    item_id: null,
     title: '',
     author: '',
+    category: 'Action',
   });
 
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const fieldName = e.target.name;
-    setUserInput({
-      ...userInput,
-      id: `${Math.floor(Math.random()*1000)}`,
+    setbookDetails({
+      ...bookDetails,
       [fieldName]: e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addBook(userInput));
-    setUserInput({
+
+    const updatedBookDetails = {...bookDetails, item_id: uuidv4()}
+    dispatch(addBookAsync(updatedBookDetails));
+
+    setbookDetails({
       title: '',
       author: '',
     });
@@ -37,13 +40,13 @@ const AddForm = () => {
       <form className={`${styles['add-form']}`} onSubmit={handleSubmit}>
         <div className={`${styles['form-control']}`}>
           <label htmlFor="book-title">
-            <input type="text" id="book-title" name="title" value={userInput.title} placeholder="Book Title" onChange={handleChange} />
+            <input type="text" id="book-title" name="title" value={bookDetails.title} placeholder="Book Title" onChange={handleChange} />
           </label>
         </div>
 
         <div className={`${styles['form-control']}`}>
           <label htmlFor="author-name">
-            <input type="text" id="author-name" name="author" value={userInput.author} placeholder="Author" onChange={handleChange} />
+            <input type="text" id="author-name" name="author" value={bookDetails.author} placeholder="Author" onChange={handleChange} />
           </label>
         </div>
 
