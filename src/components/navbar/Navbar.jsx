@@ -5,7 +5,7 @@ import styles from './Navbar.module.css';
 
 const Navbar = () => (
   <header>
-    <div className={`container ${styles['header--wrapper']}`}>
+    <div className={`${styles['header--wrapper']}`}>
       <div className={`${styles['header--left']}`}>
         <span>Bookstore CMS</span>
         <nav>

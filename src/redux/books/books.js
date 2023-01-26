@@ -7,23 +7,38 @@ const ADD = 'bookstore/books/ADD';
 const REMOVE = 'bookstore/books/REMOVE';
 const SET = 'bookstore/books/SET';
 
-const initialState = [];
+const initialState = {
+  books: [],
+  status: 'idle',
+};
 
 const booksReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case SET: {
-      return payload;
+      return {
+        ...state,
+        status: 'succeeded',
+        books: payload,
+      };
     }
 
     case ADD:
-      return [...state, action.payload];
+      return {
+        ...state,
+        status: 'succeeded',
+        books: [...state.books, payload],
+      };
 
     case REMOVE: {
-      const books = [...state];
+      const books = [...state.books];
       const index = books.indexOf(action.payload);
       const updatedBooks = books.filter((book, id) => (id !== index));
-      return updatedBooks;
+      return {
+        ...state,
+        status: 'succeeded',
+        books: updatedBooks,
+      };
     }
 
     default:
@@ -65,6 +80,11 @@ export const getAllBooksAsync = createAsyncThunk(SET, async (param, thunkAPI) =>
   try {
     const response = await bookService.getAllBooks();
     const data = await response.json();
+
+    if (!data) {
+      throw new Error('No data found :(');
+    }
+
     payload = getArrayFromJSON(data);
     thunkAPI.dispatch({ type: SET, payload });
   } catch (error) {
