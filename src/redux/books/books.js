@@ -1,46 +1,88 @@
+import bookService from '../../services/books';
+
 // Actions
 const ADD = 'bookstore/books/ADD';
 const REMOVE = 'bookstore/books/REMOVE';
+const SET = 'bookstore/books/SET';
 
-const initialState = [
-  {
-    id: '1',
-    genre: 'Action',
-    title: 'The Hunger Games',
-    author: 'Suzanne Collins',
-  },
-  {
-    id: '2',
-    genre: 'Science Fiction',
-    title: 'Dune',
-    author: 'Frank Herbert',
-  },
-];
+const initialState = [];
 
 const booksReducer = (state = initialState, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
+    case SET: {
+      const keys = Object.keys(payload);
+
+      const updatedState = keys.map((key) => ({
+        item_id: key,
+        title: payload[key][0].title,
+        author: payload[key][0].author,
+        category: payload[key][0].category,
+      }));
+      return updatedState;
+    }
+
     case ADD:
       return [...state, action.payload];
+
     case REMOVE: {
       const books = [...state];
       const index = books.indexOf(action.payload);
       const updatedBooks = books.filter((book, id) => (id !== index));
       return updatedBooks;
     }
+
     default:
       return state;
   }
 };
 
 // Action creators
-export const addBook = (payload) => ({
-  type: ADD,
-  payload,
-});
 
-export const removeBook = (payload) => ({
-  type: REMOVE,
-  payload,
-});
+export const addBookAsync = (payload) => async (dispatch) => {
+  let data;
+  try {
+    const response = await bookService.createNewBook(payload);
+    data = response.text();
+    dispatch({
+      type: ADD,
+      payload,
+    });
+  } catch (error) {
+    return error;
+  }
+  return data;
+};
+
+export const removeBookAsync = (payload) => async (dispatch) => {
+  let data;
+  try {
+    const response = await bookService.deleteSingleBook(payload);
+    data = response.text();
+
+    dispatch({
+      type: REMOVE,
+      payload,
+    });
+  } catch (error) {
+    return error;
+  }
+  return data;
+};
+
+export const getAllBooksAsync = () => async (dispatch) => {
+  let payload;
+  try {
+    const response = await bookService.getAllBooks();
+    payload = await response.json();
+    dispatch({
+      type: SET,
+      payload,
+    });
+  } catch (error) {
+    return error;
+  }
+  return payload;
+};
 
 export default booksReducer;
