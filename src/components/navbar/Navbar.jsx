@@ -16,7 +16,7 @@ const Navbar = () => (
         </nav>
       </div>
       <div className={`${styles['header--right']}`}>
-        <BsPersonFill color="#0290ff" size={30}/>
+        <BsPersonFill color="#0290ff" size={60}/>
       </div>
     </div>
   </header>

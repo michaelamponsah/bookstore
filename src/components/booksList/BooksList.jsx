@@ -7,10 +7,10 @@ const BooksList = () => {
   const bookData = useSelector((state) => state.books.books);
 
   return (
-    <ul>
+    <ul className={styles.wrapper}>
       {
         bookData.map((book) => (
-          <li key={book.item_id} className={styles.wrapper}>
+          <li key={book.item_id} className={styles.item}>
             <Book book={book} />
           </li>
         ))
