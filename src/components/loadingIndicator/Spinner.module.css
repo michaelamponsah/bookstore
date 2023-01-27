@@ -1,0 +1,15 @@
+.wrapper {
+  margin-top: 10em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper p {
+  margin: 1em 0;
+}
+
+.loader {
+  height: 50px !important;
+}
