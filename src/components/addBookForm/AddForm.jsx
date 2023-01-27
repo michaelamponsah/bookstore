@@ -9,9 +9,10 @@ const AddForm = () => {
     item_id: null,
     title: '',
     author: '',
-    category: 'Action',
+    category: '--Select Category--',
   });
 
+  const categories = ['Crime', 'Adventure', 'Action'];
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -25,12 +26,13 @@ const AddForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const updatedBookDetails = {...bookDetails, item_id: uuidv4()}
+    const updatedBookDetails = { ...bookDetails, item_id: uuidv4() };
     dispatch(addBookAsync(updatedBookDetails));
 
     setbookDetails({
       title: '',
       author: '',
+      category: '--Select Category--',
     });
   };
 
@@ -54,7 +56,7 @@ const AddForm = () => {
 
         <div className={`${styles['form-control']}`}>
           <label htmlFor="author-name">
-            <input 
+            <input
               type="text"
               id="author-name"
               name="author"
@@ -63,6 +65,22 @@ const AddForm = () => {
               onChange={handleChange}
               required
             />
+          </label>
+        </div>
+
+        <div className={`${styles['form-control']}`}>
+          <label htmlFor="category-name">
+            <select name="category" id="category" onChange={handleChange} required value={bookDetails.category}>
+              <option value="">{bookDetails.category}</option>
+              {categories.map((category) => (
+                <option
+                  key={category}
+                  value={category}
+                >
+                  {category}
+                </option>
+              ))}
+            </select>
           </label>
         </div>
 

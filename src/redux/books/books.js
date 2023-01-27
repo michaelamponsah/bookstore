@@ -26,7 +26,7 @@ const booksReducer = (state = initialState, action) => {
     case ADD:
       return {
         ...state,
-        status: 'succeeded',
+        status: 'submitted',
         books: [...state.books, payload],
       };
 
@@ -76,21 +76,20 @@ export const removeBookAsync = createAsyncThunk(REMOVE, async (payload, thunkAPI
 });
 
 export const getAllBooksAsync = createAsyncThunk(SET, async (param, thunkAPI) => {
-  let payload;
   try {
     const response = await bookService.getAllBooks();
     const data = await response.json();
 
-    if (!data) {
+    if (data.error) {
       throw new Error('No data found :(');
+    } else {
+      const payload = getArrayFromJSON(data);
+      thunkAPI.dispatch({ type: SET, payload });
+      return payload;
     }
-
-    payload = getArrayFromJSON(data);
-    thunkAPI.dispatch({ type: SET, payload });
   } catch (error) {
     return error;
   }
-  return payload;
 });
 
 export default booksReducer;
