@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AddForm from '../../components/addBookForm/AddForm';
 import BooksList from '../../components/booksList/BooksList';
+import Loader from '../../components/loadingIndicator/Spinner';
 import { getAllBooksAsync } from '../../redux/books/books';
 
 const BooksPage = () => {
@@ -12,11 +13,11 @@ const BooksPage = () => {
     if (status === 'idle') {
       dispatch(getAllBooksAsync());
     }
-  }, [status, dispatch]);
+  }, [dispatch, status]);
 
   return (
     <>
-      <BooksList />
+      { status === 'idle' ? <Loader /> : <BooksList /> }
       <AddForm />
     </>
   );
