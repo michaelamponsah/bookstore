@@ -11,16 +11,16 @@ const Navbar = () => (
         <nav>
           <ul>
             <li>
-              <NavLink 
-                className={({isActive}) => (isActive ? styles.active : styles.link)} 
+              <NavLink
+                className={({ isActive }) => (isActive ? styles.active : styles.link)}
                 to="/"
               >
                 Books
               </NavLink>
             </li>
             <li>
-              <NavLink 
-                className={({isActive}) => (isActive ? styles.active : styles.link)}
+              <NavLink
+                className={({ isActive }) => (isActive ? styles.active : styles.link)}
                 to="/categories"
               >
                 Categories
@@ -30,7 +30,7 @@ const Navbar = () => (
         </nav>
       </div>
       <div className={`${styles['header--right']}`}>
-        <BsPersonFill color="#0290ff" size={60}/>
+        <BsPersonFill color="#0290ff" size={60} />
       </div>
     </div>
   </header>
