@@ -10,8 +10,22 @@ const Navbar = () => (
         <span>Bookstore CMS</span>
         <nav>
           <ul>
-            <li><NavLink to="/">Books</NavLink></li>
-            <li><NavLink to="/categories">Categories</NavLink></li>
+            <li>
+              <NavLink 
+                className={({isActive}) => (isActive ? styles.active : styles.link)} 
+                to="/"
+              >
+                Books
+              </NavLink>
+            </li>
+            <li>
+              <NavLink 
+                className={({isActive}) => (isActive ? styles.active : styles.link)}
+                to="/categories"
+              >
+                Categories
+              </NavLink>
+            </li>
           </ul>
         </nav>
       </div>
